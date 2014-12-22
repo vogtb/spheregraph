@@ -3,15 +3,17 @@ package main
 import (
   "spheregraph"
   "fmt"
+  "encoding/json"
 )
 
 func main() {
   icosa := spheregraph.Icosahedron()
-  level_2 := spheregraph.GenerateNextSet(icosa)
-  level_2 = spheregraph.ConnectSetFromParent(icosa, level_2)
+  level_2 := spheregraph.GenerateSet(icosa)
 
-
-
-
-  fmt.Println(level_2)
+  level_2_json, err := json.Marshal(level_2)
+  if err != nil {
+      fmt.Println(err)
+      return
+  }
+  fmt.Println(string(level_2_json))
 }
