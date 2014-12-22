@@ -40,32 +40,32 @@ func Icosahedron() []Face {
     return icosahedron
 }
 
-
-func GenerateSet(icosa []Face) []Face {
+func GenerateSet(parentFaceSet []Face) []Face {
     var fullListOfFaces []Face
+    count = 0
 
     // Subdivide face, and assign as children
-    for i := 0; i < len(icosa); i++ {
-        icosa[i].children = subdivideFace(icosa[i])
+    for i := 0; i < len(parentFaceSet); i++ {
+        parentFaceSet[i].children = subdivideFace(parentFaceSet[i])
         count += 4
 
         //If neighbor A is done, connect it, etc.
-        if icosa[icosa[i].a].done {
-            connectByRule(&icosa[i], &icosa[icosa[i].a], "A")
+        if parentFaceSet[parentFaceSet[i].a].done {
+            connectByRule(&parentFaceSet[i], &parentFaceSet[parentFaceSet[i].a], "A")
         }
-        if icosa[icosa[i].b].done {
-            connectByRule(&icosa[i], &icosa[icosa[i].b], "B")
+        if parentFaceSet[parentFaceSet[i].b].done {
+            connectByRule(&parentFaceSet[i], &parentFaceSet[parentFaceSet[i].b], "B")
         }
-        if icosa[icosa[i].c].done {
-            connectByRule(&icosa[i], &icosa[icosa[i].c], "C")
+        if parentFaceSet[parentFaceSet[i].c].done {
+            connectByRule(&parentFaceSet[i], &parentFaceSet[parentFaceSet[i].c], "C")
         }
-        icosa[i].done = true
+        parentFaceSet[i].done = true
     }
 
     //For each parent faces
-    for i := 0; i < len(icosa); i++ {
-        for x := 0; x < len(icosa[i].children); x++ {
-            fullListOfFaces = append(fullListOfFaces, icosa[i].children[x])
+    for i := 0; i < len(parentFaceSet); i++ {
+        for x := 0; x < len(parentFaceSet[i].children); x++ {
+            fullListOfFaces = append(fullListOfFaces, parentFaceSet[i].children[x])
         }
     }
     return fullListOfFaces
@@ -98,8 +98,6 @@ func connectByRule(faceOne *Face, faceTwo *Face, rule string) {
     }
 }
 
-
-
 // Will return 4 faces that makeup a given face
 func subdivideFace(face Face) []Face {
     parent := face.index
@@ -111,11 +109,3 @@ func subdivideFace(face Face) []Face {
     }
     return set
 }
-
-
-
-
-
-
-
-
