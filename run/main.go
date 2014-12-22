@@ -7,7 +7,8 @@ import (
 
 func main() {
   icosa := spheregraph.Icosahedron()
-  level_2 := spheregraph.SubdivideSet(icosa)
+  level_2 := spheregraph.GenerateNextSet(icosa)
+  level_2 := spheregraph.ConnectSetFromParent(icosa, level_2)
 
 
 
