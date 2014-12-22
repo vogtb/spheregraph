@@ -3,17 +3,13 @@ package main
 import (
   "spheregraph"
   "fmt"
-  "encoding/json"
 )
 
 func main() {
-  icosa := spheregraph.Icosahedron()
-  level_2 := spheregraph.GenerateSet(icosa)
-
-  level_2_json, err := json.Marshal(level_2)
-  if err != nil {
-      fmt.Println(err)
-      return
-  }
-  fmt.Println(string(level_2_json))
+  level_1 := spheregraph.Icosahedron()
+  level_2 := spheregraph.GenerateSet(level_1)
+  fmt.Println(len(level_2))
+  level_3 := spheregraph.GenerateSet(level_2)
+  fmt.Println(len(level_3))
+  fmt.Println(level_3)
 }
