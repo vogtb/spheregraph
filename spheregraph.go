@@ -11,11 +11,13 @@ type Face struct {
     children        []Face
 }
 
-var icosahedron []Face
-var count int64
+var (
+    icosahedron []Face
+    count int64
+)
 
-func Icosahedron() []Face {
-    icosahedron := []Face {
+func Init() {
+    icosahedron = []Face {
         Face {index: 0, a: 4, b: 1, c: 5, done: false,},
         Face {index: 1, a: 7, b: 0, c: 2, done: false,},
         Face {index: 2, a: 9, b: 3, c: 1, done: false,},
@@ -37,6 +39,9 @@ func Icosahedron() []Face {
         Face {index: 18, a: 19, b: 17, c: 12, done: false,},
         Face {index: 19, a: 18, b: 14, c: 15, done: false,},
     }
+}
+
+func Icosahedron() []Face {
     return icosahedron
 }
 
@@ -62,7 +67,7 @@ func GenerateSet(parentFaceSet []Face) []Face {
         parentFaceSet[i].done = true
     }
 
-    //For each parent faces
+    //For each parent face, put children in final result list
     for i := 0; i < len(parentFaceSet); i++ {
         for x := 0; x < len(parentFaceSet[i].children); x++ {
             fullListOfFaces = append(fullListOfFaces, parentFaceSet[i].children[x])
