@@ -19,5 +19,5 @@ go run run/main.go
 #Testing
 
 ```bash
-go test spheregraph_test.go
+go test
 ```

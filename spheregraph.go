@@ -11,6 +11,18 @@ type Face struct {
     children        []Face
 }
 
+func (face *Face) GetA() int64 {
+    return face.a
+}
+
+func (face *Face) GetB() int64 {
+    return face.b
+}
+
+func (face *Face) GetC() int64 {
+    return face.c
+}
+
 var (
     icosahedron []Face
     count int64
